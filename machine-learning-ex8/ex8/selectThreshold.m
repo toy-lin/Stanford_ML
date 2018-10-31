@@ -22,19 +22,11 @@ for epsilon = min(pval):stepsize:max(pval)
     %               
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
-
-
-
-
-
-
-
-
-
-
-
-
-
+    predictions = (pval < epsilon);
+    hit = sum(predictions .+ yval == 2);
+    p = hit * 1.0 / sum(predictions);
+    r = hit * 1.0 / sum(yval==1);
+    F1 = 2*p*r/(p+r);
     % =============================================================
 
     if F1 > bestF1
